@@ -5,6 +5,7 @@ const navLinks = [
   { label: "Estudos", to: "/#oferecemos" },
   { label: "Reflexão", to: "/#oferecemos" },
   { label: "Histórias", to: "/historias" },
+  { label: "Partilhar", to: "/submeter-historia" },
   { label: "Projectos", to: "/#equipa" },
   { label: "Contato", to: "/#contato" },
 ];
@@ -20,7 +21,8 @@ function Navbar() {
   }, []);
 
   const isHome = pathname === "/";
-  const isHistorias = pathname === "/historias";
+  const isHistorias = pathname === "/historias" || /^\/historias\/.+/.test(pathname);
+  const isSubmeter = pathname === "/submeter-historia";
 
   return (
     <nav
@@ -52,7 +54,9 @@ function Navbar() {
           Home
         </Link>
         {navLinks.map((item) => {
-          const active = item.to === "/historias" && isHistorias;
+          const active =
+            (item.to === "/historias" && isHistorias) ||
+            (item.to === "/submeter-historia" && isSubmeter);
           return (
             <Link
               key={item.label}

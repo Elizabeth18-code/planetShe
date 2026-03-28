@@ -1,3 +1,6 @@
+import { Link } from "react-router-dom";
+import StoryBody from "./StoryBody";
+
 function formatDate(iso) {
   if (!iso) return "—";
   try {
@@ -24,21 +27,14 @@ function formatShortDate(iso) {
   }
 }
 
-function StoryBody({ text }) {
-  const paragraphs = text
-    .trim()
-    .split(/\n\n+/)
-    .map((p) => p.trim())
-    .filter(Boolean);
-
+function TitleLink({ href, children, className }) {
+  if (!href) {
+    return <span className={className}>{children}</span>;
+  }
   return (
-    <div className="font-paper text-paper-ink/90 text-[0.95rem] leading-relaxed md:columns-2 md:gap-10 [&>p+p]:mt-4">
-      {paragraphs.map((p, i) => (
-        <p key={i} className="text-justify hyphens-auto break-words">
-          {p}
-        </p>
-      ))}
-    </div>
+    <Link to={href} className={`${className} hover:text-pink-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-pink-300 rounded-sm`}>
+      {children}
+    </Link>
   );
 }
 
@@ -114,7 +110,12 @@ function StoriesNewspaper({ stories, loading, error }) {
             </p>
           ) : null}
           <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold leading-[1.1] mb-4">
-            {featured.title}
+            <TitleLink
+              href={featured.shareSlug ? `/historias/${encodeURIComponent(featured.shareSlug)}` : null}
+              className="font-display text-3xl sm:text-4xl md:text-5xl font-bold leading-[1.1] text-paper-ink"
+            >
+              {featured.title}
+            </TitleLink>
           </h2>
           <p className="font-paper text-lg md:text-xl leading-snug text-paper-ink/85 mb-6 max-w-3xl">
             {featured.excerpt ||
@@ -161,7 +162,16 @@ function StoriesNewspaper({ stories, loading, error }) {
                     </p>
                   ) : null}
                   <h4 className="font-display text-xl md:text-2xl font-bold leading-snug mb-3">
-                    {story.title}
+                    <TitleLink
+                      href={
+                        story.shareSlug
+                          ? `/historias/${encodeURIComponent(story.shareSlug)}`
+                          : null
+                      }
+                      className="font-display text-xl md:text-2xl font-bold leading-snug text-paper-ink"
+                    >
+                      {story.title}
+                    </TitleLink>
                   </h4>
                   <p className="font-paper text-sm leading-relaxed text-paper-ink/80 line-clamp-4">
                     {story.excerpt ||

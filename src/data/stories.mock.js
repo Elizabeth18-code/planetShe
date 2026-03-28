@@ -14,6 +14,7 @@ Hoje ainda tenho dias difíceis. A diferença é que já não acho que mereço p
     authorLabel: "M. R.",
     publishedAt: "2026-03-12T10:00:00.000Z",
     category: "Autoconfiança",
+    shareSlug: "demo-acreditar",
   },
   {
     id: "mock-2",
@@ -27,6 +28,7 @@ Hoje partilho pedaços dessas cartas, não como acusação, mas como mapa: de on
     authorLabel: "Anónima",
     publishedAt: "2026-03-08T14:30:00.000Z",
     category: "Reflexão",
+    shareSlug: "demo-cartas",
   },
   {
     id: "mock-3",
@@ -38,6 +40,7 @@ Quando o corpo pediu trégua, ouvi. Foi desconfortável. A culpa não desaparece
     authorLabel: "Lúcia V.",
     publishedAt: "2026-03-01T09:15:00.000Z",
     category: "Bem-estar",
+    shareSlug: "demo-descanso",
   },
   {
     id: "mock-4",
@@ -51,6 +54,7 @@ Longe não é sinónimo de vazio. Às vezes é espaço para recomeçar.`,
     authorLabel: "Kika",
     publishedAt: "2026-02-20T16:45:00.000Z",
     category: "Identidade",
+    shareSlug: "demo-raizes",
   },
 ];
 

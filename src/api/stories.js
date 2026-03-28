@@ -1,13 +1,26 @@
 import mockStories from "../data/stories.mock.js";
+import { isFirebaseConfigured } from "../firebase.js";
+import { normalizeStory } from "./storyNormalize.js";
 
 /**
- * Lista histórias publicadas (coleção pública no backend).
+ * Lista histórias publicadas.
  *
- * Configuração: define `VITE_PUBLIC_STORIES_URL` no `.env` com o endpoint GET
- * que devolve JSON — array de histórias ou `{ stories: [...] }`.
- * Quando não definido, usa dados de exemplo para desenvolvimento.
+ * Ordem de prioridade:
+ * 1. Firebase Firestore (`stories_public`) — se `VITE_FIREBASE_*` estiver completo no `.env`
+ * 2. `VITE_PUBLIC_STORIES_URL` — GET JSON (array ou `{ stories: [...] }`)
+ * 3. Dados de exemplo (desenvolvimento)
  */
 export async function fetchPublishedStories() {
+  if (isFirebaseConfigured()) {
+    try {
+      const { fetchStoriesFromFirestore } = await import("./storiesFirestore.js");
+      return await fetchStoriesFromFirestore();
+    } catch (e) {
+      console.error("[stories] Firestore:", e);
+      throw e;
+    }
+  }
+
   const url = import.meta.env.VITE_PUBLIC_STORIES_URL;
   if (!url) {
     return mockStories.map(normalizeStory);
@@ -26,28 +39,23 @@ export async function fetchPublishedStories() {
   }
 }
 
-function normalizeStory(raw) {
-  const published =
-    raw.publishedAt ?? raw.published_at ?? raw.createdAt ?? raw.created_at ?? null;
-  return {
-    id: String(
-      raw.id ??
-        raw.storyId ??
-        raw._id ??
-        `s-${Date.now()}-${Math.random().toString(36).slice(2, 11)}`,
-    ),
-    title: raw.title ?? raw.headline ?? "Sem título",
-    excerpt: raw.excerpt ?? raw.summary ?? raw.lead ?? "",
-    body: raw.body ?? raw.content ?? raw.text ?? "",
-    authorLabel: raw.authorLabel ?? raw.author_label ?? raw.pseudonym ?? formatAnonymity(raw),
-    publishedAt: published,
-    category: raw.category ?? raw.section ?? "",
-  };
-}
+/**
+ * Uma história pelo `shareSlug` (URL amigável após publicação no backend).
+ */
+export async function fetchStoryBySlug(slug) {
+  const clean = decodeURIComponent(String(slug || "").trim());
+  if (!clean) return null;
 
-function formatAnonymity(raw) {
-  const mode = raw.anonymityMode ?? raw.anonymity ?? raw.mode;
-  if (mode === "anonymous" || raw.anonymous === true) return "Anónima";
-  if (mode === "pseudonym" && raw.pseudonym) return raw.pseudonym;
-  return raw.authorName ?? "Colaboradora";
+  if (isFirebaseConfigured()) {
+    try {
+      const { fetchStoryByShareSlug } = await import("./storiesFirestore.js");
+      return await fetchStoryByShareSlug(clean);
+    } catch (e) {
+      console.error("[stories] Firestore:", e);
+      throw e;
+    }
+  }
+
+  const found = mockStories.find((s) => s.shareSlug === clean);
+  return found ? normalizeStory(found) : null;
 }

@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 const footerNav = [
   { label: "Home", to: "/" },
   { label: "Histórias", to: "/historias" },
+  { label: "Partilhar história", to: "/submeter-historia" },
   { label: "Estudos", to: "/#oferecemos" },
   { label: "Reflexão", to: "/#oferecemos" },
   { label: "Projetos", to: "/#equipa" },
