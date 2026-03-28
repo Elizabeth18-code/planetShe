@@ -1,6 +1,7 @@
 function Hero() {
   return (
     <section
+      id="inicio"
       className="pt-24 min-h-screen flex items-center relative overflow-hidden"
       style={{ background: "linear-gradient(135deg, #fff0f5 0%, #fce7f3 40%, #f3e8ff 100%)" }}
     >

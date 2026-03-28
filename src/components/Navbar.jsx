@@ -1,9 +1,17 @@
 import { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 
-const navLinks = ["Estudos", "Reflexão", "Histórias", "Projectos", "Contato"];
+const navLinks = [
+  { label: "Estudos", to: "/#oferecemos" },
+  { label: "Reflexão", to: "/#oferecemos" },
+  { label: "Histórias", to: "/historias" },
+  { label: "Projectos", to: "/#equipa" },
+  { label: "Contato", to: "/#contato" },
+];
 
 function Navbar() {
   const [scrolled, setScrolled] = useState(false);
+  const { pathname } = useLocation();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -11,41 +19,52 @@ function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const isHome = pathname === "/";
+  const isHistorias = pathname === "/historias";
+
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 py-4 transition-all duration-300 ${
         scrolled ? "bg-white shadow-md" : "bg-white"
       }`}
     >
-      {/* Logo */}
-      <div
+      <Link
+        to="/"
         className="flex items-center gap-2"
         style={{ animation: "fadeDown 0.6s ease both" }}
       >
-       <img src="/logo.jpeg" alt="Planet She" className="w-10 h-10 object-contain" />
+        <img src="/logo.jpeg" alt="Planet She" className="w-10 h-10 object-contain" />
         <span className="text-xl font-bold text-pink-500">Planet She</span>
-      </div>
+      </Link>
 
-      {/* Links */}
       <div
         className="flex items-center gap-2"
         style={{ animation: "fadeDown 0.6s ease 0.1s both" }}
       >
-        <a
-          href="#"
-          className="px-5 py-2 rounded-full bg-pink-500 text-white font-semibold text-sm hover:bg-pink-600 transition"
+        <Link
+          to="/"
+          className={`px-5 py-2 rounded-full font-semibold text-sm transition ${
+            isHome
+              ? "bg-pink-500 text-white hover:bg-pink-600"
+              : "text-gray-700 hover:text-pink-500"
+          }`}
         >
           Home
-        </a>
-        {navLinks.map((item) => (
-          <a
-            key={item}
-            href="#"
-            className="px-3 py-2 text-gray-700 text-sm font-medium hover:text-pink-500 transition"
-          >
-            {item}
-          </a>
-        ))}
+        </Link>
+        {navLinks.map((item) => {
+          const active = item.to === "/historias" && isHistorias;
+          return (
+            <Link
+              key={item.label}
+              to={item.to}
+              className={`px-3 py-2 text-sm font-medium transition ${
+                active ? "text-pink-500 font-semibold" : "text-gray-700 hover:text-pink-500"
+              }`}
+            >
+              {item.label}
+            </Link>
+          );
+        })}
       </div>
     </nav>
   );

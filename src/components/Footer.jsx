@@ -1,4 +1,13 @@
-const footerLinks = ["Home", "Reflexão", "Projetos", "Estudos", "Histórias", "Blog"];
+import { Link } from "react-router-dom";
+
+const footerNav = [
+  { label: "Home", to: "/" },
+  { label: "Histórias", to: "/historias" },
+  { label: "Estudos", to: "/#oferecemos" },
+  { label: "Reflexão", to: "/#oferecemos" },
+  { label: "Projetos", to: "/#equipa" },
+  { label: "Blog", to: "/historias" },
+];
 
 function Footer() {
   return (
@@ -8,8 +17,6 @@ function Footer() {
     >
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-3 gap-12 mb-12">
-
-          {/* Logo + descrição */}
           <div className="space-y-4">
             <div className="flex items-center gap-2">
               <div className="w-9 h-9 rounded-full bg-pink-500 flex items-center justify-center">
@@ -20,28 +27,26 @@ function Footer() {
               <span className="text-white font-bold text-lg">Planet She</span>
             </div>
             <p className="text-purple-200 text-sm leading-relaxed">
-              Cresça, inspire-se e transforme sua vida. Um espaço para mulheres que desejam
-              crescer pessoalmente, emocionalmente e espiritualmente.
+              Cresça, inspire-se e transforme sua vida. Um espaço para mulheres que desejam crescer
+              pessoalmente, emocionalmente e espiritualmente.
             </p>
           </div>
 
-          {/* Navegação */}
           <div>
             <h4 className="text-white font-semibold mb-4">Navegação</h4>
             <div className="grid grid-cols-2 gap-2">
-              {footerLinks.map((item) => (
-                <a
-                  key={item}
-                  href="#"
+              {footerNav.map((item) => (
+                <Link
+                  key={item.label}
+                  to={item.to}
                   className="text-purple-200 text-sm hover:text-pink-400 transition"
                 >
-                  {item}
-                </a>
+                  {item.label}
+                </Link>
               ))}
             </div>
           </div>
 
-          {/* Contato */}
           <div>
             <h4 className="text-white font-semibold mb-4">Contato</h4>
             <div className="space-y-2">
@@ -51,10 +56,8 @@ function Footer() {
               </a>
             </div>
           </div>
-
         </div>
 
-        {/* Copyright */}
         <div className="border-t border-purple-800 pt-8 text-center">
           <p className="text-purple-300 text-sm">© 2026 Planet She. Todos os direitos reservados.</p>
         </div>
