@@ -205,7 +205,7 @@ function SubmeterHistoria() {
               />
               <p className="text-xs text-gray-500">
                 {contentLen} caracteres
-                {!contentOk ? ` — faltam ${10000 - contentLen} para o mínimo` : " — ok"}
+                {!contentOk ? ` — faltam ${30 - contentLen} para o mínimo` : " — ok"}
               </p>
             </section>
 
