@@ -269,6 +269,11 @@ function AdminDashboard() {
     load();
   }, [load]);
 
+  const total = stories.length;
+  const receivedCount = stories.filter((s) => (s.state || "received") === "received").length;
+  const inReviewCount = stories.filter((s) => s.state === "in_review").length;
+  const publishedCount = stories.filter((s) => s.state === "published").length;
+
   return (
     <div className="space-y-6">
       <div className="flex flex-wrap items-center justify-between gap-4">
@@ -293,6 +298,26 @@ function AdminDashboard() {
           </button>
         </div>
       </div>
+      {!loading && !error ? (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+          <div className="rounded-2xl border border-gray-200 bg-white px-4 py-4">
+            <p className="text-xs uppercase tracking-wider text-gray-500">Total</p>
+            <p className="mt-1 text-2xl font-black text-gray-900">{total}</p>
+          </div>
+          <div className="rounded-2xl border border-amber-200 bg-amber-50 px-4 py-4">
+            <p className="text-xs uppercase tracking-wider text-amber-700">Pendentes</p>
+            <p className="mt-1 text-2xl font-black text-amber-800">{receivedCount}</p>
+          </div>
+          <div className="rounded-2xl border border-blue-200 bg-blue-50 px-4 py-4">
+            <p className="text-xs uppercase tracking-wider text-blue-700">Em revisão</p>
+            <p className="mt-1 text-2xl font-black text-blue-800">{inReviewCount}</p>
+          </div>
+          <div className="rounded-2xl border border-emerald-200 bg-emerald-50 px-4 py-4">
+            <p className="text-xs uppercase tracking-wider text-emerald-700">Publicadas</p>
+            <p className="mt-1 text-2xl font-black text-emerald-800">{publishedCount}</p>
+          </div>
+        </div>
+      ) : null}
 
       {loading ? (
         <p className="text-sm text-gray-500">A carregar…</p>
@@ -385,6 +410,9 @@ function Admin() {
           </div>
           <Link to="/historias" className="text-sm font-semibold text-pink-600 hover:underline">
             Ver site público →
+          </Link>
+          <Link to="/perfil" className="text-sm font-semibold text-pink-600 hover:underline">
+            Ver perfil →
           </Link>
         </header>
         <AdminDashboard />

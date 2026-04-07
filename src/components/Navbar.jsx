@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { useAuth } from "../hooks/useAuth";
 
 const navLinks = [
   { label: "Estudos", to: "/#oferecemos" },
@@ -13,6 +14,7 @@ const navLinks = [
 function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const { pathname } = useLocation();
+  const { user, isAdmin } = useAuth();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -69,6 +71,38 @@ function Navbar() {
             </Link>
           );
         })}
+        {user ? (
+          <Link
+            to="/perfil"
+            className={`px-3 py-2 text-sm font-medium transition ${
+              pathname === "/perfil" ? "text-pink-500 font-semibold" : "text-gray-700 hover:text-pink-500"
+            }`}
+          >
+            Perfil
+          </Link>
+        ) : null}
+        {user && isAdmin ? (
+          <Link
+            to="/admin"
+            className={`px-3 py-2 text-sm font-medium transition ${
+              pathname === "/admin" ? "text-pink-500 font-semibold" : "text-gray-700 hover:text-pink-500"
+            }`}
+          >
+            Painel
+          </Link>
+        ) : null}
+        {!user ? (
+          <Link
+            to="/admin"
+            className={`px-4 py-2 rounded-full text-sm font-semibold transition ${
+              pathname === "/admin"
+                ? "bg-pink-500 text-white hover:bg-pink-600"
+                : "border border-pink-300 text-pink-600 hover:bg-pink-50"
+            }`}
+          >
+            Entrar como equipa
+          </Link>
+        ) : null}
       </div>
     </nav>
   );

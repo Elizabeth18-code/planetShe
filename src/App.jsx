@@ -5,6 +5,7 @@ import Historias from "./pages/Historias";
 import HistoriaDetalhe from "./pages/HistoriaDetalhe";
 import SubmeterHistoria from "./pages/SubmeterHistoria";
 import Admin from "./pages/Admin";
+import Perfil from "./pages/Perfil";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="/historias" element={<Historias />} />
           <Route path="/historias/:slug" element={<HistoriaDetalhe />} />
           <Route path="/submeter-historia" element={<SubmeterHistoria />} />
+          <Route path="/perfil" element={<Perfil />} />
         </Route>
       </Routes>
     </div>
