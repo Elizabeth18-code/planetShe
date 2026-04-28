@@ -12,7 +12,7 @@ const firebaseConfig = {
 };
 
 /** Região das Cloud Functions (deve coincidir com `setGlobalOptions` no backend). */
-const DEFAULT_FUNCTIONS_REGION = "europe-west1";
+const DEFAULT_FUNCTIONS_REGION = "us-central1";
 
 /**
  * True quando as variáveis mínimas da Web app estão no `.env`.
