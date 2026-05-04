@@ -1,4 +1,4 @@
-// Ícones separados por nome para evitar JSX inline nos dados
+
 function ServiceIcon({ name }) {
   const icons = {
     studies: (

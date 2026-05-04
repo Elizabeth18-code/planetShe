@@ -1,4 +1,4 @@
-const footerLinks = ["Home", "Reflexão", "Projetos", "Estudos", "Histórias", "Blog"];
+const footerLinks = ["Home", "Reflexão", "Projectos", "Estudos", "Histórias"];
 
 function Footer() {
   return (
@@ -9,7 +9,7 @@ function Footer() {
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-3 gap-12 mb-12">
 
-          {/* Logo + descrição */}
+           {/*Logo e descrição*/}
           <div className="space-y-4">
             <div className="flex items-center gap-2">
               <div className="w-9 h-9 rounded-full bg-pink-500 flex items-center justify-center">
@@ -17,11 +17,11 @@ function Footer() {
                   <polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26" />
                 </svg>
               </div>
-              <span className="text-white font-bold text-lg">Planet She</span>
+              <span className="text-white font-bold text-lg">MeetingTheGirls</span>
             </div>
             <p className="text-purple-200 text-sm leading-relaxed">
               Cresça, inspire-se e transforme sua vida. Um espaço para mulheres que desejam
-              crescer pessoalmente, emocionalmente e espiritualmente.
+              crescer profissionalmente.
             </p>
           </div>
 
@@ -45,7 +45,7 @@ function Footer() {
           <div>
             <h4 className="text-white font-semibold mb-4">Contato</h4>
             <div className="space-y-2">
-              <p className="text-purple-200 text-sm">contato@planetshe.com</p>
+              <p className="text-purple-200 text-sm">contato@planetShe.com</p>
               <a href="#" className="text-purple-200 text-sm hover:text-pink-400 transition block">
                 Segue-nos nas redes sociais
               </a>
@@ -54,7 +54,7 @@ function Footer() {
 
         </div>
 
-        {/* Copyright */}
+        {/* direitossss e tal */}
         <div className="border-t border-purple-800 pt-8 text-center">
           <p className="text-purple-300 text-sm">© 2026 Planet She. Todos os direitos reservados.</p>
         </div>

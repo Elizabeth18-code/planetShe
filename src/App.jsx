@@ -1,20 +1,23 @@
-import Navbar from "./components/Navbar";
-import Hero from "./components/Hero";
-import Services from "./components/Services";
-import Team from "./components/Team";
-import CTA from "./components/CTA";
-import Footer from "./components/Footer";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+
+import Home from "./pages/Home";
+import Reflexao from "./pages/Reflexao";
+import Projetos from "./pages/Projetos";
+import Contato from "./pages/Contato";
+import Estudos from "./pages/Estudos";
 
 function App() {
   return (
-    <div className="font-sans bg-white overflow-x-hidden">
-      <Navbar />
-      <Hero />
-      <Services />
-      <Team />
-      <CTA />
-      <Footer />
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/reflexao" element={<Reflexao />} />
+        <Route path="/projetos" element={<Projetos />} />
+        <Route path="/contato" element={<Contato />} />
+        <Route path="/estudos" element={<Estudos />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

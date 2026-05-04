@@ -28,7 +28,7 @@ function Services() {
           </h2>
           <p className="text-gray-500 text-lg max-w-xl mx-auto">
             Descobre todas as ferramentas e recursos que preparámos para te ajudar a crescer
-            pessoalmente, emocionalmente e espiritualmente.
+            profissionalmente.
           </p>
         </div>
 
