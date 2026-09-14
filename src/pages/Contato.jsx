@@ -1,11 +1,6 @@
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
-
 function Contato() {
   return (
-    <div className="min-h-screen bg-white font-sans">
-      <Navbar />
-
+    <>
       {/* HERO */}
       <section
         className="pt-32 pb-16 px-8 text-center relative overflow-hidden"
@@ -87,15 +82,13 @@ function Contato() {
         </div>
       </section>
 
-      <Footer />
-
       <style>{`
         @keyframes blobMove1 { 0%, 100% { transform: translate(0,0) scale(1); } 50% { transform: translate(30px,-20px) scale(1.1); } }
         @keyframes blobMove2 { 0%, 100% { transform: translate(0,0) scale(1); } 50% { transform: translate(-25px,15px) scale(1.08); } }
         @keyframes fadeDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes spinSlow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
       `}</style>
-    </div>
+    </>
   );
 }
 

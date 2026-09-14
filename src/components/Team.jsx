@@ -8,6 +8,7 @@ function Team() {
 
   return (
     <section
+      id="equipa"
       className="py-24 px-8"
       style={{ background: "linear-gradient(180deg, #fdf2f8 0%, #f5f3ff 100%)" }}
     >

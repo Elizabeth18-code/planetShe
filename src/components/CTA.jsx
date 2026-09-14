@@ -5,6 +5,7 @@ function CTA() {
 
   return (
     <section
+      id="contato"
       ref={ctaRef}
       className="py-28 px-8 relative overflow-hidden flex items-center justify-center"
       style={{ background: "linear-gradient(135deg, #ec4899 0%, #f43f5e 40%, #a855f7 100%)" }}

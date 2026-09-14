@@ -1,0 +1,28 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function isAdmin() {
+      return request.auth != null
+        && exists(/databases/$(database)/documents/admin_users/$(request.auth.uid))
+        && get(/databases/$(database)/documents/admin_users/$(request.auth.uid)).data.active == true;
+    }
+
+    match /admin_users/{userId} {
+      allow read: if request.auth != null && request.auth.uid == userId;
+      allow write: if false;
+    }
+
+    match /stories_private/{storyId} {
+      allow create: if request.resource.data.private_content is string
+        && request.resource.data.private_content.size() >= 30;
+      allow read, update: if isAdmin();
+      allow delete: if false;
+    }
+
+    match /stories_public/{storyId} {
+      allow read: if true;
+      allow create, update: if isAdmin();
+      allow delete: if false;
+    }
+  }
+}

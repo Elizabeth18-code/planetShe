@@ -1,6 +1,3 @@
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
-
 const conteudos = [
   {
     id: 1,
@@ -95,7 +92,6 @@ function ConteudoCard({ conteudo }) {
   const tipo = tipoConfig[conteudo.tipo];
   return (
     <div className="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex flex-col">
-      {/* Imagem ou gradiente */}
       <div className={`h-44 bg-gradient-to-br ${conteudo.gradient} flex items-center justify-center relative`}>
         {conteudo.foto ? (
           <img src={conteudo.foto} alt={conteudo.titulo} className="w-full h-full object-cover" />
@@ -104,13 +100,11 @@ function ConteudoCard({ conteudo }) {
             <path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
           </svg>
         )}
-        {/* Tipo badge */}
         <span className={`absolute top-4 left-4 inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold ${tipo.color}`}>
           {tipo.icon} {conteudo.tipo}
         </span>
       </div>
 
-      {/* Conteúdo */}
       <div className="p-6 flex flex-col gap-3 flex-1">
         <span className="text-xs font-semibold text-gray-400 uppercase tracking-wider">{conteudo.categoria}</span>
         <h3 className="text-lg font-black text-gray-900 leading-tight">{conteudo.titulo}</h3>
@@ -136,10 +130,7 @@ function ConteudoCard({ conteudo }) {
 
 function Estudos() {
   return (
-    <div className="min-h-screen bg-white font-sans">
-      <Navbar />
-
-      {/* HERO */}
+    <>
       <section
         className="pt-32 pb-16 px-8 text-center relative overflow-hidden"
         style={{ background: "linear-gradient(135deg, #fff0f5 0%, #fce7f3 50%, #f3e8ff 100%)" }}
@@ -165,7 +156,6 @@ function Estudos() {
         </div>
       </section>
 
-      {/* FILTROS */}
       <section className="py-8 px-8 border-b border-gray-100">
         <div className="max-w-7xl mx-auto flex items-center gap-3 flex-wrap">
           {categorias.map((cat) => (
@@ -183,7 +173,6 @@ function Estudos() {
         </div>
       </section>
 
-      {/* CONTEÚDOS */}
       <section className="py-16 px-8" style={{ background: "linear-gradient(180deg, #ffffff 0%, #fdf2f8 100%)" }}>
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-3 gap-6">
@@ -194,15 +183,11 @@ function Estudos() {
         </div>
       </section>
 
-      <Footer />
-
       <style>{`
         @keyframes blobMove1 { 0%, 100% { transform: translate(0,0) scale(1); } 50% { transform: translate(30px,-20px) scale(1.1); } }
         @keyframes blobMove2 { 0%, 100% { transform: translate(0,0) scale(1); } 50% { transform: translate(-25px,15px) scale(1.08); } }
-        @keyframes fadeDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes spinSlow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
       `}</style>
-    </div>
+    </>
   );
 }
 
